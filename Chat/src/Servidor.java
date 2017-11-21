@@ -1,5 +1,6 @@
-
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -7,12 +8,10 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
-public class Servidor {
-    public static void main(String[] args) {
+public class Servidor  {
+
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		MarcoServidor mimarco=new MarcoServidor();
@@ -21,11 +20,13 @@ public class Servidor {
 			
 		
 	}	
+}
 
-    private static class MarcoServidor extends JFrame implements Runnable {
-
-        public MarcoServidor() 
-                setBounds(600,300,280,350);				
+class MarcoServidor extends JFrame implements Runnable {
+	
+	public MarcoServidor(){
+		
+		setBounds(600,300,280,350);				
 			
 		JPanel milamina= new JPanel();
 		
@@ -41,10 +42,14 @@ public class Servidor {
 		
 		Thread mihilo=new Thread(this);
 		mihilo.start();
+		
+		}
+	
+	
 
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		//System.out.println("Ya escucha");
 		
 		try {
@@ -115,8 +120,7 @@ public class Servidor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        }
 		
-        }
-    }
+	}
+	private	JTextArea areatexto;
 }
