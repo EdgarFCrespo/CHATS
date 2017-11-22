@@ -45,5 +45,40 @@ class EnvioLine extends WindowAdapter{
 }
 
 class LaminaMarcoCliente extends JPanel implements Runnable{
+    public LaminaMarcoCliente(){
+        String nick_usuario = JOptionPane.showInputDialog("CUAL ES SU NICK:");
+        JLabel n_nick = new JLabel("Nick: ");
+        
+        nick = new JLabel();
+        nick.setText(nick_usuario);
+        add(nick);
+        
+        JLabel texto = new JLabel("| En linea: ");
+        add(texto);
+        
+        ip = new JComboBox();
+        //ip.addItem("1");
+		//ip.addItem("2");
+		//ip.addItem("3");
+		//ip.addItem("192.168.0.14");
+		add(ip);
+        
+        campochat = new JTextArea(12,20);
+        add(campochat);
+        
+        campo1  = new JTextField(20);
+        add(campo1);
+        
+        miboton = new JButton("Enviar");
+        EnviaTexto mievento = new EnviaTexto();
+        miboton.addActionListener(mievento);
+        add(miboton);
+        
+        Thread mihilo = new Thread(this);
+        mihilo.start();        
+    }
     
+    private class EnviaTexto implements ActionListener{
+        
+    }
 }
