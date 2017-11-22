@@ -16,7 +16,8 @@ import javax.swing.*;
 
 public class Cliente {
     public static void main(String[] args){
-        
+        MarcoCliente mimarco = new MarcoCliente();
+        mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
 
@@ -33,6 +34,16 @@ class MarcoCliente extends JFrame{
 //=============Envia señal=====================
 class EnvioLine extends WindowAdapter{
     public void windowOpened(WindowEvent e){
-        
+        try{
+            Socket misocket = new Socket("192.68.0.13",9999);
+            Paquete_Envio datos = new Paquete_Envio();
+            datos.setMensaje("online");
+            ObjectOutputStream paquete_datos = new ObjectOutputStream(misocket.getOuputStream());
+            paquete_datos.writeObject(datos);
+        }catch(Exception e2){}
     }
+}
+
+class LaminaMarcoCliente extends JPanel implements Runnable{
+    
 }
