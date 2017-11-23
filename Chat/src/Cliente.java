@@ -38,7 +38,7 @@ class MarcoCliente extends JFrame{
         setVisible(true);
         addWindowListener(new EnvioLine());
     }
-}
+}//fin clase MarcoCliente
 
 //=============Envia señal=====================
 class EnvioLine extends WindowAdapter{
@@ -71,7 +71,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable{
 		//ip.addItem("3");
 		//ip.addItem("192.168.0.14");
 		add(ip);
-        
+
+	    
         campochat = new JTextArea(12,20);
         add(campochat);
         
@@ -110,6 +111,7 @@ class LaminaMarcoCliente extends JPanel implements Runnable{
 		}
 	}
     }
+	//Declaracion de componentes
 	private JTextArea campochat;
 	private JtextField campo1;
 	private JComboBox ip;
