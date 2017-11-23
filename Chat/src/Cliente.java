@@ -1,28 +1,36 @@
+//importacion de librerias para identificar lo que hace el raton y lo que sucede en la ventana
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WinowAdapter;
 import java.awt.event.WindowEvent;
+//importacion de librerias para salida de datos, entrada, salida y conversion a bits de objetos y sus excepciones
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+//importacion de librerias para obtener y poder usar la IP, crear servidores y sockets con su excepcion
 import java.net.InetAdrress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+//librerias para listas de arreglos
 import java.util.ArrayList;
 import javax.swing.*;
 
+//inicio clase Cliente
 public class Cliente {
+	//metodo main para mandar llamar la clase 
     public static void main(String[] args){
         MarcoCliente mimarco = new MarcoCliente();
         mimarco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-}
+}//fin clase Cliente
 
+//incio clase MarcoCliente
 class MarcoCliente extends JFrame{
 
+	//Constructor para la ventana principal
 	public MarcoCliente(){
         setBounds(600,300,280,350);
         LaminaMarcoCliente milamina = new LaminaMarcoCliente();
