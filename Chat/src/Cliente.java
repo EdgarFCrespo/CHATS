@@ -22,7 +22,8 @@ public class Cliente {
 }
 
 class MarcoCliente extends JFrame{
-    public MarcoCliente(){
+
+	public MarcoCliente(){
         setBounds(600,300,280,350);
         LaminaMarcoCliente milamina = new LaminaMarcoCliente();
         add(milamina);
@@ -79,6 +80,25 @@ class LaminaMarcoCliente extends JPanel implements Runnable{
     }
     
     private class EnviaTexto implements ActionListener{
-        
+        @Override
+	public void actionPerformed(ActionEvent arg0){
+		campochat.append("\n" + campo1.getText());
+		
+		try{
+			//servidor
+			Socket misocket = new Socket("192.168.0.13", 9999);
+			Paquete_Envio datos = new Paquete_Envio();
+			datos.setNick(nick.getText());
+			datos.setMensaje(campo1.getText());
+			datos.setIp(ip.getSelectedItem().toString());
+			ObjectOutputStream paquete_datos = new ObjectOutputStream(misocket.getOutputStream());
+			paquete_datos.writeObject(datos);
+			misocket.close();
+		}catch(UnknownHostException e){
+			e.printStackTrace();
+		}catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+	}
     }
 }
