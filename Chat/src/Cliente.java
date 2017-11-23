@@ -81,7 +81,8 @@ class LaminaMarcoCliente extends JPanel implements Runnable{
         miboton = new JButton("Enviar");
         EnviaTexto mievento = new EnviaTexto();
         miboton.addActionListener(mievento);
-        add(miboton);
+
+	    add(miboton);
         
         Thread mihilo = new Thread(this);
         mihilo.start();        
@@ -109,4 +110,48 @@ class LaminaMarcoCliente extends JPanel implements Runnable{
 		}
 	}
     }
+	private JTextArea campochat;
+	private JtextField campo1;
+	private JComboBox ip;
+	private JLabel nick;
+	private JButton miboton;
+	private String mia;
+	
+	@Override
+	public void run(){
+		try{
+			mia = InetAddress.getLocalHost().getHostAddress();
+		}catch(UnknownHostException e1){
+			e1.printStackTrace();
+		}
+		
+		try{
+			ServerSocket servidor_cliente= new ServerSocket(9090);
+			Socket cliente;
+			Paquete_Envio PaqueteRecibido;
+			
+			while(true){
+				cliente = servidor_cliente.accept();
+				ObjectInputStream flujoentrada = new ObjectInputStream(cliente.getInputStream());
+				PaqueteRecibido = (Paquete_Envio)flujoentrada.readObject();
+				if(!PaqueteRecibido.getMensaje().equals("online")){
+					campochat.append("\n" + PaqueteRecibido.getNick() + ": " + PaqueteRecibido.getMensaje());
+				}else{
+					ArrayList <String> ipsMenu = new ArrayList<String>();
+					ipsMenu = PaqueteRecibido.getIps();
+					ip.removeAllItems();
+					
+					for(String z:ipsMenu){
+						if(z.equals(mia)){
+							System.out.println("Ya entre");
+						}else{
+							ip.addItem(z);
+						}
+					}
+				}
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
 }
